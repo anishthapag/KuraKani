@@ -3,7 +3,7 @@ const path = require('path');
 const container = dependable.container();
 const simpleDependecies = [
     ['_', 'lodash'],
-    ['mongoose','mongoose']
+    ['passport','passport']
   
 ];
 simpleDependecies.forEach(function(val){
