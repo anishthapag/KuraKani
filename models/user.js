@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     facebook: {type:String, default:''},
     fbTokens: Array,
     google: {type:String, default:''},
-    googleTokens: Arrya
+    googleTokens: Array
 });
 
 module.exports = mongoose.model('User', userSchema);
