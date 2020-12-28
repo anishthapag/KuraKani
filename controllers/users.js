@@ -22,7 +22,7 @@ module.exports = function(_, passport){
              failureFlash: true
          }),
          homePage: function(req, res){
-            return res.render('home') 
+            return res.render('home'); 
          }
      }
 }
