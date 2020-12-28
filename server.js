@@ -17,10 +17,10 @@ const container = require('./container');
 
 
 
-container.resolve(function(users){
-
+container.resolve(function(users, _){
+ 
     mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb://localhost/KuraKani', {useNewUrlParser: true});
+    mongoose.connect('mongodb://localhost/KuraKani', {useNewUrlParser: true}); // updated: before(useMongoClient:ture)
     
 
     const app = SetupExpress();
@@ -55,7 +55,7 @@ container.resolve(function(users){
         app.use(bodyParser.urlencoded({extended: true})); 
 
         app.use(validator());
-      
+        
         app.use(session({
             secret: 'thisisasecretkey',
             resave: true,
@@ -66,6 +66,7 @@ container.resolve(function(users){
         app.use(flash());
         app.use(passport.initialize());
         app.use(passport.session());
+        app.locals._ = _ ;
     }    
 
 });
