@@ -7,12 +7,13 @@ module.exports = function(_, passport,UserValidation){
             router.get('/signup', this.getSignUp);
             router.get('/home', this.homePage);
 
-            router.post('/', this.postLogin);
+            router.post('/', UserValidation.LoginValidation, this.postLogin);
             router.post('/signup',UserValidation.SignUpValidation, this.postSignUp);
          },
 
          indexPage: function(req,res){
-             return res.render('index');
+            const errors = req.flash('error');
+             return res.render('index', {title: 'KuraKani | Login', messages: errors, hasErrors: errors.length > 0});
          },
          postLogin: passport.authenticate('local.Login',{
             successRedirect: '/home',
