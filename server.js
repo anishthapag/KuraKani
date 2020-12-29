@@ -13,11 +13,11 @@ const passport = require('passport');
 
 
 
-const container = require('./container');
+    const container = require('./container');
 
 
 
-container.resolve(function(users, _){
+    container.resolve(function(users, _){
  
     mongoose.Promise = global.Promise;
     mongoose.connect('mongodb://localhost/KuraKani', {useNewUrlParser: true}); // updated: before(useMongoClient:ture)
@@ -66,7 +66,8 @@ container.resolve(function(users, _){
         app.use(flash());
         app.use(passport.initialize());
         app.use(passport.session());
-        app.locals._ = _ ;
+        app.locals._ =_;
+       
     }    
 
 });
