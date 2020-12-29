@@ -16,7 +16,7 @@ module.exports = function(_, passport,UserValidation){
          },
          postLogin: passport.authenticate('local.Login',{
             successRedirect: '/home',
-            failureRedirect: '/signup',
+            failureRedirect: '/',
             failureFlash: true
         }),
           
