@@ -11,7 +11,12 @@ const { validationResult } = require("express-validator");
             router.get('/home', this.homePage);
 
             // router.post('/', UserValidation.LoginValidation, this.postLogin);
-            router.post('/', UserValidation.LoginValidation, this.postLogin);
+            router.post('/', [
+                validator.check('email').not().isEmpty().isEmail()
+                .withMessage('Entered Email is Invalid'),
+                validator.check('password').not().isEmpty()
+                .withMessage('Enter Password, The name should atleast be 5 characters'),
+            ],this.postValidation, this.postLogin);
 
             // router.post('/signup',UserValidation.SignUpValidation, this.postSignUp);
             router.post('/signup', [
