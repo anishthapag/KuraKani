@@ -10,7 +10,9 @@ const { validationResult } = require("express-validator");
             router.get('/signup', this.getSignUp);
             router.get('/home', this.homePage);
 
+            // router.post('/', UserValidation.LoginValidation, this.postLogin);
             router.post('/', UserValidation.LoginValidation, this.postLogin);
+
             // router.post('/signup',UserValidation.SignUpValidation, this.postSignUp);
             router.post('/signup', [
                 validator.check('username').not().isEmpty().isLength({min: 5})
@@ -39,8 +41,22 @@ const { validationResult } = require("express-validator");
 
          postValidation: function(req,res, next){
             const err = validator.validationResult(req);
-            console.log(err);
-         },
+            const errors = err.array();
+            const messages = [];
+            errors.forEach((error) => {
+            messages.push(error.msg);
+            });
+            
+            if(messages.length > 0){
+                req.flash('error', messages);
+                if(req.url === '/signup') {
+                    res.redirect('/signup');
+                }else if(req.url === '/'){
+                    res.redirect('/');
+                }
+            }
+            return next();
+            },
 
          postSignUp: passport.authenticate('local.signup',{
              successRedirect: '/home',
