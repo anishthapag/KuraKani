@@ -1,6 +1,9 @@
-'use strict'; 
+'use strict';
+const { validationResult } = require("express-validator");
 
-module.exports = function(_, passport,UserValidation){
+ 
+
+    module.exports = function(_, passport,UserValidation, validator){
      return {
          SetRouting: function(router){
             router.get('/', this.indexPage);
@@ -8,7 +11,15 @@ module.exports = function(_, passport,UserValidation){
             router.get('/home', this.homePage);
 
             router.post('/', UserValidation.LoginValidation, this.postLogin);
-            router.post('/signup',UserValidation.SignUpValidation, this.postSignUp);
+            // router.post('/signup',UserValidation.SignUpValidation, this.postSignUp);
+            router.post('/signup', [
+                validator.check('username').not().isEmpty().isLength({min: 5})
+                .withMessage('Enter Username, The name should atleast be 5 characters'),
+                validator.check('email').not().isEmpty().isEmail()
+                .withMessage('Entered Email is Invalid'),
+                validator.check('password').not().isEmpty()
+                .withMessage('Enter Password, The name should atleast be 5 characters'),
+            ], this.postValidation, this.postSignUp);
          },
 
          indexPage: function(req,res){
@@ -24,6 +35,11 @@ module.exports = function(_, passport,UserValidation){
          getSignUp: function(req, res){
              const errors = req.flash('error');
              return res.render('signup', {title: 'KuraKani | SignUp', messages: errors, hasErrors: errors.length > 0});
+         },
+
+         postValidation: function(req,res, next){
+            const err = validator.validationResult(req);
+            console.log(err);
          },
 
          postSignUp: passport.authenticate('local.signup',{
