@@ -1,1 +1,1 @@
-Testing two
+Footballkik is a chat application for football fans.

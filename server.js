@@ -1,26 +1,28 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const ejs = require('ejs');
-const http = require('http');
+    const express = require('express');
+    const bodyParser = require('body-parser');
+    const ejs = require('ejs');
+    const http = require('http');
 
-const cookieParser = require('cookie-parser');
-const validator = require('express-validator');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
-const mongoose = require('mongoose')
-const flash = require('flash');
-const passport = require('passport');
+    const cookieParser = require('cookie-parser');
+    const validator = require('express-validator');
+    const session = require('express-session');
+    const MongoStore = require('connect-mongo')(session);
+    const mongoose = require('mongoose')
+    const flash = require('connect-flash');
+    const passport = require('passport');
+    
 
 
 
     const container = require('./container');
+    const { response } = require('express');
 
 
 
     container.resolve(function(users, _){
  
     mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb://localhost/KuraKani', {useNewUrlParser: true}); // updated: before(useMongoClient:ture)
+    mongoose.connect('mongodb://localhost/KuraKani', {useNewUrlParser: true, useUnifiedTopology:true}); // updated: before(useMongoClient:ture)
     
 
     const app = SetupExpress();
@@ -28,6 +30,7 @@ const passport = require('passport');
     function SetupExpress(){
         const app = express();
         const server = http.createServer(app);
+        
         server.listen(3000, function(){
             console.log('Listening to port No 3000');
         });
