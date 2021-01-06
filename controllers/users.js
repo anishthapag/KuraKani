@@ -75,23 +75,8 @@ module.exports = function(_, passport, User, validator){
            scope: 'email' 
         }),
         
-        // getGoogleLogin: passport.authenticate('google', {
-        //     scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read']
-        // }),
         
-        // googleLogin: passport.authenticate('google', {
-        //     successRedirect: '/home',
-        //     failureRedirect: '/signup',
-        //     failureFlash: true
-        // }),
-        
-        facebookLogin: passport.authenticate('facebook', {
-            successRedirect: '/home',
-            failureRedirect: '/signup',
-            failureFlash: true
-        }),
-        
-        homePage: function(req, res){
+            homePage: function(req, res){
             return res.render('home'); 
          }
     }
