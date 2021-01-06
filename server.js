@@ -10,14 +10,8 @@
     const mongoose = require('mongoose')
     const flash = require('connect-flash');
     const passport = require('passport');
-    
-
-
-
     const container = require('./container');
     const { response } = require('express');
-
-
 
     container.resolve(function(users, _){
  
@@ -48,7 +42,7 @@
     function ConfigureExpress(app){
         require('./passport/passport-local');
         require('./passport/passport-facebook');
-
+        require('./passport/passport-google');
 
 
         app.use(express.static('public'));
