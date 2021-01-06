@@ -47,7 +47,7 @@
 
     function ConfigureExpress(app){
         require('./passport/passport-local');
-
+        require('./passport/passport-facebook');
 
 
 
