@@ -9,6 +9,8 @@ module.exports = function(_, passport, User, validator){
             router.get('/home', this.homePage);
             router.get('/auth/facebook',this.getFacebookLogin);
             router.get('/auth/facebook/callback', this.facebookLogin)
+            router.get('/auth/google', this.getGoogleLogin);
+            router.get('/auth/google/callback', this.googleLogin)
           
             
             
@@ -74,7 +76,16 @@ module.exports = function(_, passport, User, validator){
         getFacebookLogin: passport.authenticate('facebook', {
            scope: 'email' 
         }),
+
+        getGoogleLogin: passport.authenticate('google', {
+            scope: ['profile','email']
+        }),
         
+        googleLogin: passport.authenticate('google', {
+            successRedirect: '/home',
+            failureRedirect: '/signup',
+            failureFlash: true
+        }),
         
             homePage: function(req, res){
             return res.render('home'); 
