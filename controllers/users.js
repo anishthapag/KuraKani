@@ -55,15 +55,15 @@ module.exports = function(_, passport, User, validator){
             errors.forEach((error) => {
                 messages.push(error.msg);
             });
-            // req.flash('error', messages);
-            if (messages.length > 0) {
-                req.flash('error', messages);
-                if (req.url === '/signup') {
-                    res.redirect('/signup');
-                } else if(req.url === '/') {
-                    res.redirect('/');
-                }
-            }
+            req.flash('error', messages);
+            // if (messages.length > 0) {
+            //     req.flash('error', messages);
+            //     if (req.url === '/signup') {
+            //         res.redirect('/signup');
+            //     } else if(req.url === '/') {
+            //         res.redirect('/');
+            //     }
+            // }
             return next();
         },
         
@@ -78,7 +78,7 @@ module.exports = function(_, passport, User, validator){
         }),
 
         getGoogleLogin: passport.authenticate('google', {
-            scope: ['profile','email']
+            scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read']
         }),
         
         googleLogin: passport.authenticate('google', {
