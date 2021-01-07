@@ -6,8 +6,9 @@ const container = dependable.container();
 const simpleDependecies = [
     ['_', 'lodash'],
     ['passport', 'passport'],
-    ['formidable','formidable']
-    ['validator', 'express-validator']
+    ['validator', 'express-validator'],
+    ['Clubs','./models/clubs.js'],
+    ['aws','./helpers/AWSUpload.js']
 ];
 
 simpleDependecies.forEach(function(val){
@@ -24,3 +25,19 @@ container.register('container', function(){
 });
 
 module.exports = container;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
