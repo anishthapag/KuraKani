@@ -12,6 +12,11 @@ module.exports = function(async, Club, _){
                 }
             ],(err, results)=>{
                 const res1 = results[0];
+                const dataChunk = [];
+                const chunkSize = 3;
+                for (let i=0; i<res1.length; i += chunkSize){
+                    dataChunk.push(res1.slice(i, i+chunkSize)); 
+                }
                 res.render('home', {title: 'KuraKani - Home', data: res1}); 
             })
              
