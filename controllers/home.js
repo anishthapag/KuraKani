@@ -30,7 +30,11 @@ module.exports = function(async, Club, _){
                 for (let i=0; i<res1.length; i += chunkSize){
                     dataChunk.push(res1.slice(i, i+chunkSize));  
                 }
-                res.render('home', {title: 'KuraKani - Home', data: dataChunk, country: res2}); 
+
+
+                const countrySort = _.sortBy(res2, '_id');
+
+                res.render('home', {title: 'KuraKani - Home', data: dataChunk, country: countrySort}); 
             })
              
          }
