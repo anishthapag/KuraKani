@@ -15,7 +15,7 @@ module.exports = function(formidable, Club, aws){
 
         adminPostPage: function(req, res){
             const newClub = new Club();
-            newClub.name = req.body.name;
+            newClub.name = req.body.club;
             newClub.country = req.body.country;
             newClub.image = req.body.upload;
             newClub.save((err)=>{

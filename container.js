@@ -9,8 +9,8 @@ const simpleDependecies = [
     ['formidable','formidable'],
     ['validator', 'express-validator'],
     ['async','async'],
-    ['Clubs','./models/clubs.js'],
-    ['aws','./helpers/AWSUpload.js'],
+    ['Club','./models/clubs'],
+    ['aws','./helpers/AWSUpload'],
   
 ];
 
